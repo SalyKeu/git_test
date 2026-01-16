@@ -1,7 +1,8 @@
+import React, { useState } from "react";
 import AddTask from "./Create_Task/addTask";
 
 // Task card component (optional but cleaner)
-function TaskCard({ title, description }) {
+function TaskCard({ title, description, date, priority, status }) {
   return (
     <div className="rounded bg-gray-700 p-4 shadow-lg shadow-gray-300/50">
       <h3 className="text-white font-bold text-md">{title}</h3>
@@ -11,6 +12,12 @@ function TaskCard({ title, description }) {
 }
 
 function Task() {
+  const [tasks, setTasks] = useState([]);
+  const handleAddTask = (newTasks) => {
+    setTasks([...tasks, newTasks]);
+  };
+
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="min-h-screen p-10 bg-gray-900">
       <div className="rounded-xl p-10 shadow-lg bg-gray-900">
@@ -22,15 +29,18 @@ function Task() {
               <h2 className="flex-grow text-lg font-semibold text-white text-center">
                 TODO
               </h2>
-              <AddTask />
+              <AddTask onAddTask={handleAddTask} />
             </div>
 
-            {/* Tasks */}
-            <TaskCard
-              title="Sample Task"
-              description="This is a description of the sample task."
-            />
-
+            <div>
+              {tasks.map((task, index) => (
+                <TaskCard
+                  key={index}
+                  title={task.title}
+                  description={task.description}
+                />
+              ))}
+            </div>
             {/* Task creation form */}
           </div>
 
