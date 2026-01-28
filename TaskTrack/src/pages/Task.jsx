@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import AddTask from "./Create_Task/addTask";
 
-// Task card component (optional but cleaner)
+// Task card component
 function TaskCard({ title, description, date, priority, status }) {
+  const priorityColors = {
+    High: "bg-red-500",
+    Medium: "bg-yellow-500",
+    Low: "bg-green-500",
+  };
+
   return (
-    <div className="rounded bg-gray-700 p-4 shadow-lg shadow-gray-300/50">
-      <h3 className="text-white font-bold text-md">{title}</h3>
+    <div className="rounded bg-gray-700 p-4 shadow-lg shadow-gray-300/50 space-y-2">
+      <div className="flex justify-between items-start gap-2">
+        <h3 className="text-white font-bold text-md">{title}</h3>
+        <span
+          className={`${priorityColors[priority]} text-white text-xs px-2 py-1 rounded-full shrink-0`}
+        >
+          {priority}
+        </span>
+      </div>
       <p className="text-gray-300 text-sm">{description}</p>
+      <div className="flex justify-between items-center text-xs text-gray-400 mt-2">
+        <span>{"Due" + date || "No due date"}</span>
+        <span className="bg-gray-600 text-white px-2 py-1 rounded">
+          {status}
+        </span>
+      </div>
     </div>
   );
 }
@@ -17,7 +36,6 @@ function Task() {
     setTasks([...tasks, newTasks]);
   };
 
-  const [showForm, setShowForm] = useState(false);
   return (
     <div className="min-h-screen p-10 bg-gray-900">
       <div className="rounded-xl p-10 shadow-lg bg-gray-900">
@@ -32,16 +50,20 @@ function Task() {
               <AddTask onAddTask={handleAddTask} />
             </div>
 
-            <div>
-              {tasks.map((task, index) => (
-                <TaskCard
-                  key={index}
-                  title={task.title}
-                  description={task.description}
-                />
-              ))}
+            <div className="space-y-3">
+              {tasks
+                .filter((task) => task.status === "TODO")
+                .map((task, index) => (
+                  <TaskCard
+                    key={index}
+                    title={task.title}
+                    description={task.description}
+                    date={task.date}
+                    priority={task.priority}
+                    status={task.status}
+                  />
+                ))}
             </div>
-            {/* Task creation form */}
           </div>
 
           {/* In Progress Column */}
@@ -49,7 +71,20 @@ function Task() {
             <h2 className="text-lg font-semibold text-white text-center mb-4">
               In Progress
             </h2>
-            {/* In Progress Tasks */}
+            <div className="space-y-3">
+              {tasks
+                .filter((task) => task.status === "In Progress")
+                .map((task, index) => (
+                  <TaskCard
+                    key={index}
+                    title={task.title}
+                    description={task.description}
+                    date={task.date}
+                    priority={task.priority}
+                    status={task.status}
+                  />
+                ))}
+            </div>
           </div>
 
           {/* Done Column */}
@@ -57,7 +92,19 @@ function Task() {
             <h2 className="text-lg font-semibold text-white text-center mb-4">
               Done
             </h2>
-            {/* Done Tasks */}
+            <div className="space-y-3">
+              {tasks
+                .filter((task) => task.status === "Done")
+                .map((task, index) => (
+                  <TaskCard
+                    key={index}
+                    title={task.title}
+                    description={task.description}
+                    date={task.date}
+                    status={task.status}
+                  />
+                ))}
+            </div>
           </div>
         </div>
       </div>

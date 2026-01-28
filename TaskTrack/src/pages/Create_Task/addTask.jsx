@@ -9,6 +9,7 @@ function AddTask(props) {
   const [priority, setPriority] = useState("Medium");
   const [priorityOptions] = useState(["High", "Medium", "Low"]);
   const [status, setStatus] = useState("TODO");
+  const [statusOptions] = useState(["TODO", "In Progress", "Done"]);
 
   const newTask = {
     title,
@@ -76,6 +77,17 @@ function AddTask(props) {
                 className="p-2 rounded-sm text-white bg-gray-500 w-full"
               >
                 {priorityOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="p-2 rounded-sm text-white bg-gray-500 w-full"
+              >
+                {statusOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
