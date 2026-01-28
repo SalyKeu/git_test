@@ -7,22 +7,16 @@ export default function NavBar({ children }) {
         <h1 className="text-xl font-bold text-black justify-start font-sarif ml-4">
           FitTrack
         </h1>
-        <div className="flex justify-center gap-4">
-          <Link
-            to="/Homepage"
-            className="text-black font-sarif font-bold hover:bg-gray-300 rounded-xl px-2 py-1"
-          >
+        <div className="flex justify-center gap-6">
+          <Link to="/Homepage" className="button-primary button-primary:active">
             Homepage
           </Link>
-          <Link
-            to="/Task"
-            className="text-black font-sarif font-bold hover:bg-gray-300 rounded-xl px-2 py-1"
-          >
+          <Link to="/Task" className="button-primary button-primary:active">
             Task
           </Link>
         </div>
         <div className="flex justify-end">
-          <button className="bg-black text-white px-4 py-1 rounded-xl mr-4 font-sarif font-bold">
+          <button className="button-primary button-primary:active mr-6">
             Login
           </button>
         </div>

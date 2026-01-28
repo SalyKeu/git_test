@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddTask from "./Create_Task/addTask";
+import AddTask from "../Task/addTask";
 
 // Task card component
 function TaskCard({ title, description, date, priority, status }) {
@@ -37,74 +37,75 @@ function Task() {
   };
 
   return (
-    <div className="min-h-screen p-10 bg-gray-900">
-      <div className="rounded-xl p-10 shadow-lg bg-gray-900">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* TODO Column */}
-          <div className="bg-gray-800 rounded-xl p-6 min-h-[500px]">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="flex-grow text-lg font-semibold text-white text-center">
-                TODO
-              </h2>
-              <AddTask onAddTask={handleAddTask} />
-            </div>
-
-            <div className="space-y-3">
-              {tasks
-                .filter((task) => task.status === "TODO")
-                .map((task, index) => (
-                  <TaskCard
-                    key={index}
-                    title={task.title}
-                    description={task.description}
-                    date={task.date}
-                    priority={task.priority}
-                    status={task.status}
-                  />
-                ))}
-            </div>
+    <div className="min-h-screen px-40 py-20 overflow-y-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* TODO Column */}
+        <div className="bg-white rounded-xl min-h-[500px] task-container">
+          {/* Header */}
+          <div className="border-b-4 flex justify-between items-center py-4">
+            <h2 className="text-md font-bold text-black ml-4">TODO</h2>
+            <AddTask onAddTask={handleAddTask} className="mr-4" />
           </div>
-
-          {/* In Progress Column */}
-          <div className="bg-gray-800 rounded-xl p-6 min-h-[500px]">
-            <h2 className="text-lg font-semibold text-white text-center mb-4">
-              In Progress
-            </h2>
-            <div className="space-y-3">
-              {tasks
-                .filter((task) => task.status === "In Progress")
-                .map((task, index) => (
-                  <TaskCard
-                    key={index}
-                    title={task.title}
-                    description={task.description}
-                    date={task.date}
-                    priority={task.priority}
-                    status={task.status}
-                  />
-                ))}
-            </div>
+          {/* Task Cards */}
+          <div className="space-y-3">
+            {tasks
+              .filter((task) => task.status === "TODO")
+              .map((task, index) => (
+                <TaskCard
+                  key={index}
+                  title={task.title}
+                  description={task.description}
+                  date={task.date}
+                  priority={task.priority}
+                  status={task.status}
+                />
+              ))}
           </div>
+        </div>
 
-          {/* Done Column */}
-          <div className="bg-gray-800 rounded-xl p-6 min-h-[500px]">
-            <h2 className="text-lg font-semibold text-white text-center mb-4">
-              Done
-            </h2>
-            <div className="space-y-3">
-              {tasks
-                .filter((task) => task.status === "Done")
-                .map((task, index) => (
-                  <TaskCard
-                    key={index}
-                    title={task.title}
-                    description={task.description}
-                    date={task.date}
-                    status={task.status}
-                  />
-                ))}
-            </div>
+        {/* In Progress Column */}
+        <div className="bg-white rounded-xl min-h-[500px] task-container">
+          {/* Header */}
+          <div className="border-b-4 flex justify-between items-center py-4">
+            <h2 className="text-md font-bold text-black ml-4">In Progress</h2>
+          </div>
+          {/* Task Cards */}
+          <div className="space-y-3">
+            {tasks
+              .filter((task) => task.status === "In Progress")
+              .map((task, index) => (
+                <TaskCard
+                  key={index}
+                  title={task.title}
+                  description={task.description}
+                  date={task.date}
+                  priority={task.priority}
+                  status={task.status}
+                />
+              ))}
+          </div>
+        </div>
+
+        {/* Done Column */}
+        <div className="bg-white rounded-xl min-h-[500px] task-container">
+          {/* Header */}
+          <div className="border-b-4 flex justify-between items-center py-4">
+            <h2 className="text-md font-bold text-black ml-4">Done</h2>
+          </div>
+          {/* Task Cards */}
+          <div className="space-y-3">
+            {tasks
+              .filter((task) => task.status === "Done")
+              .map((task, index) => (
+                <TaskCard
+                  key={index}
+                  title={task.title}
+                  description={task.description}
+                  date={task.date}
+                  priority={task.priority}
+                  status={task.status}
+                />
+              ))}
           </div>
         </div>
       </div>
