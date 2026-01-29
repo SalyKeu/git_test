@@ -55,7 +55,7 @@ function AddTask(props) {
                 placeholder="Enter task title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-white border-black rounded-sm border-2 py-3 text-black font-medium font-sans focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="w-full bg-white border-black rounded-sm border-2  px-4 py-3 text-black font-medium font-sans focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
               />
               <p className="text-black text-sm font-sans uppercase">Note</p>
               <textarea
