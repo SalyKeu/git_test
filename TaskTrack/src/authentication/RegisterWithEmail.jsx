@@ -1,11 +1,61 @@
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 function RegisterWithEmail() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleClose = () => {
     navigate((window.location.href = "/Homepage"));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (
+      fullName.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      confirmPassword.trim() === ""
+    ) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password should be at least 6 characters long.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      signIn(userCredential.user);
+      navigate("/Homepage");
+    } catch (error) {
+      setError(error.message);
+      console.error("Registration error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -24,7 +74,12 @@ function RegisterWithEmail() {
           <p>Enter your details below to create your account</p>
         </div>
         <div>
-          <form className="space-y-2">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {error}
+            </div>
+          )}
+          <form className="space-y-2" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2">
               <label className="text-black text-sm font-sans font-bold">
                 Full Name
@@ -33,6 +88,8 @@ function RegisterWithEmail() {
                 type="text"
                 placeholder="John Doe"
                 className="w-full p-2 border-black border-2 rounded"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -43,6 +100,8 @@ function RegisterWithEmail() {
                 type="email"
                 placeholder="m@example.com"
                 className="w-full p-2 border-black border-2 rounded"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex justify-between items-center mt-8">
@@ -54,6 +113,8 @@ function RegisterWithEmail() {
               type="password"
               placeholder="Enter your password"
               className="w-full p-2 border-black border-2 rounded"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="flex flex-col gap-2">
               <label className="text-black text-sm font-sans font-bold">
@@ -63,9 +124,17 @@ function RegisterWithEmail() {
                 type="password"
                 placeholder="Confirm your password"
                 className="w-full p-2 border-black border-2 rounded"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className="button-primary w-full mt-4">Sign Up</button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="button-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Creating account..." : "Sign Up"}
+            </button>
             <p className="text-center mt-8 text-md font-sans">
               ━━━━━━━ Or continue with ━━━━━━━
             </p>
