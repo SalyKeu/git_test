@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 import React, { useState } from "react";
+import { getAuth } from "firebase/auth";
 
 function AddTask(props) {
   const [showForm, setShowForm] = useState(false);
@@ -9,6 +10,8 @@ function AddTask(props) {
   const [date, setDate] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [status, setStatus] = useState("TODO");
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ function AddTask(props) {
       date,
       priority,
       status,
+      createdBy: user ? user.uid : "guest",
     });
     setTitle("");
     setDescription("");
@@ -37,7 +41,7 @@ function AddTask(props) {
       </div>
       {showForm && (
         <div className="bg-white/40 backdrop-blur-[3px] fixed inset-0 items-center justify-center flex z-50">
-          <div className="bg-white w-[400px] max-h-[90vh] overflow-y-auto space-y-4 task-container rounded-xl p-4">
+          <div className="bg-white w-100 max-h-[90vh] overflow-y-auto space-y-4 task-container rounded-xl p-4">
             <h3 className="text-2xl font-bold text-black text-center p-4 font-sans uppercase">
               Add New Task
             </h3>
@@ -102,8 +106,8 @@ function AddTask(props) {
                     className="w-full bg-white border-black rounded-sm border-2 px-4 py-3 text-black font-medium focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                   >
                     <option>TODO</option>
-                    <option>In Progress</option>
-                    <option>Done</option>
+                    <option>IN PROGRESS</option>
+                    <option>DONE</option>
                   </select>
                 </div>
               </div>

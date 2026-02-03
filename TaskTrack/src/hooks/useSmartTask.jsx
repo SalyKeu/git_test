@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./useAuth";
 
 const SmartTaskContext = createContext(undefined);
 
@@ -61,10 +62,14 @@ export function SmartTaskProvider({ children }) {
   );
 }
 
-export function useSmartTask() {
+export function useSmartTask(userId) {
   const context = useContext(SmartTaskContext);
   if (!context) {
     throw new Error("useSmartTask must be used within a SmartTaskProvider");
   }
-  return context;
+  // Filter tasks: if userId provided, show user's tasks; otherwise show guest tasks
+  const userTasks = userId
+    ? context.tasks.filter((task) => task.createdBy === userId)
+    : context.tasks.filter((task) => task.createdBy === 'guest');
+  return { ...context, tasks: userTasks };
 }

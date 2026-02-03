@@ -15,7 +15,7 @@ function RegisterWithEmail() {
   const [error, setError] = useState("");
 
   const handleClose = () => {
-    navigate((window.location.href = "/Homepage"));
+    navigate("/Homepage");
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +46,7 @@ function RegisterWithEmail() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       signIn(userCredential.user);
       navigate("/Homepage");
