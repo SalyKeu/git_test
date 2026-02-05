@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function MobileMenu({ onClose }) {
   return (
     <div
@@ -6,15 +8,27 @@ function MobileMenu({ onClose }) {
     >
       <div className="flex flex-col gap-4 p-8">
         <ul className="flex flex-col gap-0">
-          <li className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0">
+          <Link
+            to="/"
+            onClick={onClose}
+            className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0"
+          >
             Home
-          </li>
-          <li className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0">
+          </Link>
+          <Link
+            to="/about"
+            onClick={onClose}
+            className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0"
+          >
             About
-          </li>
-          <li className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0">
+          </Link>
+          <Link
+            to="/contact"
+            onClick={onClose}
+            className="px-4 py-4 hover:bg-pink-50 font-serif hover:cursor-pointer transition duration-200 border-b border-gray-100 last:border-b-0"
+          >
             Contact
-          </li>
+          </Link>
         </ul>
         <button className="font-serif rounded-lg p-4 bg-linear-to-r from-pink-400 to-pink-300 text-black hover:from-pink-500 hover:to-pink-400 transition duration-300 w-full font-bold shadow-md mt-2">
           Book Appointment

@@ -11,11 +11,12 @@ import {
 import whatsappSvg from "../assets/whatsapp.svg";
 import TikTok from "../assets/tiktok.svg";
 import { AiFillTikTok } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <>
-      <footer className="fixed bottom-0 left-0 w-full flex flex-col md:flex-row h-[500px] rounded border-black border-2">
+      <footer className="w-full flex flex-col md:flex-row h-auto md:h-[400px] justify-between">
         <div className="flex flex-col justify-start space-y-4">
           <h1 className="font-bold text-2xl font-serif md:ml-6 text-black">
             LashByChino
@@ -57,10 +58,22 @@ function Footer() {
             </div>
           </div>
           {/* Social Media Section */}
-          <div className="space-x-4 font-bold flex ">
+          <div className="space-x-4 font-bold flex md:ml-6 items-center">
             <Facebook />
             <Instagram />
             <AiFillTikTok className="text-[27px] text-center" />
+          </div>
+        </div>
+        {/* Service Menu Section */}
+        <div className="flex flex-col md:flex-row justify-start  mt-4 md:mt-0 gap-4 md:mr-6">
+          <div className="mr-6">
+            <h2 className="font-bold text-black">Book appointment</h2>
+            <ul className="space-y-2 flex flex-col text-black mt-4">
+              <a href="/service">Our services</a>
+              <a href="/about">About us</a>
+              <a href="/home">home</a>
+              <a href="/contact">Contact us</a>
+            </ul>
           </div>
         </div>
       </footer>
