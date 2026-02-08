@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function MobileMenu({ onClose }) {
+  const navigate = useNavigate();
   return (
     <div
       className="md:hidden fixed top-16 left-0 right-0 w-full bg-white/98 backdrop-blur-xl shadow-2xl z-40 border-b-2 border-pink-200"
@@ -30,7 +31,13 @@ function MobileMenu({ onClose }) {
             Contact
           </Link>
         </ul>
-        <button className="font-serif rounded-lg p-4 bg-linear-to-r from-pink-400 to-pink-300 text-black hover:from-pink-500 hover:to-pink-400 transition duration-300 w-full font-bold shadow-md mt-2">
+        <button
+          className="font-serif rounded-lg p-4 bg-linear-to-r from-pink-400 to-pink-300 text-black hover:from-pink-500 hover:to-pink-400 transition duration-300 w-full font-bold shadow-md mt-2"
+          onClick={() => {
+            onClose();
+            navigate("/booking");
+          }}
+        >
           Book Appointment
         </button>
       </div>

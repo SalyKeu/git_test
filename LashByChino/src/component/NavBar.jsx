@@ -1,9 +1,12 @@
 import { useState } from "react";
 import MobileMenu from "./MobileMenu.jsx";
-import Footer from "./Footer.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function NavBar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleBooking = () => {
+    navigate("/booking");
+  };
   return (
     <>
       <div>
@@ -65,7 +68,8 @@ function NavBar() {
                 </Link>
               </ul>
             </div>
-            <button className="font-serif rounded-lg p-4 bg-linear-to-r from-pink-400 to-pink-300 text-black hover:from-pink-500 hover:to-pink-400 transition duration-300 font-bold shadow-md mt-2 hidden md:inline-block md:ml-auto mr-6">
+            <button className="font-serif rounded-lg p-4 bg-linear-to-r from-pink-400 to-pink-300 text-black hover:from-pink-500 hover:to-pink-400 transition duration-300 font-bold shadow-md mt-2 hidden md:inline-block md:ml-auto mr-6
+            " onClick={handleBooking}>
               Book Appointment
             </button>
           </div>
