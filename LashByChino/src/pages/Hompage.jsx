@@ -3,7 +3,12 @@ import lash1 from "../assets/1.webp";
 import classic from "../assets/classic.jpg";
 import volume from "../assets/volume.jpg";
 import hybrid from "../assets/hybrid.webp";
-import { Map, MapControls, MapMarker, MarkerContent } from "../components/ui/map";
+import {
+  Map,
+  MapControls,
+  MapMarker,
+  MarkerContent,
+} from "../components/ui/map";
 import { Card } from "../components/ui/card";
 
 function Hompage() {
@@ -77,8 +82,7 @@ function Hompage() {
                 Volume Lash Extensions
               </h2>
               <p className="text-gray-600 leading-relaxed">
-               Bold&
-                Flamorous/ Multi-lash fans aplied to each natural lash for
+                Bold& Flamorous/ Multi-lash fans aplied to each natural lash for
                 maximul volume and drama. Ideal for a glamorous, full look.
               </p>
               <button className="text-pink-600 font-bold flex items-center gap-2 hover:gap-3 transition-all group mt-2">
@@ -103,8 +107,9 @@ function Hompage() {
                 Hybrid Lash Extensions
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                The best of both worlds. A mix of classic and volume techniques for a textured. Perfect for those who want a bit of drama with a natural feel.
-
+                The best of both worlds. A mix of classic and volume techniques
+                for a textured. Perfect for those who want a bit of drama with a
+                natural feel.
               </p>
               <button className="text-pink-600 font-bold flex items-center gap-2 hover:gap-3 transition-all group mt-2">
                 Learn More
@@ -123,7 +128,8 @@ function Hompage() {
             Ready for your transformation?
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-xl mt-3">
-            Book your appointment today and see what beautiful lashes can do for you.
+            Book your appointment today and see what beautiful lashes can do for
+            you.
           </p>
         </div>
         <div className="w-full px-4 mt-6">
@@ -132,12 +138,16 @@ function Hompage() {
               center={[145.15198599625785, -37.97585481344235]}
               zoom={15}
               styles={{
-                light: "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+                light:
+                  "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
                 dark: "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
               }}
             >
               <MapControls />
-              <MapMarker longitude={145.1519999992575} latitude={-37.97585481344235}>
+              <MapMarker
+                longitude={145.1519999992575}
+                latitude={-37.97585481344235}
+              >
                 <MarkerContent>
                   <div className="relative">
                     <div className="w-6 h-6 bg-blue-600 rounded-full border-2 border-white shadow-lg" />
@@ -155,7 +165,6 @@ function Hompage() {
           </Card>
         </div>
       </section>
-
     </main>
   );
 }
