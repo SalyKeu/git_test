@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ClassicLash from "./ClassicModal";
 import HybridLash from "./HybridModal";
 import { useModal } from "../context/useModal";
@@ -10,6 +11,7 @@ import { X } from "lucide-react";
 function BookingModal({ onClose }) {
   const { isOpen, openModal, closeModal, booking } = useModal();
   const [activeModal, setActiveModal] = useState(null);
+  const navigate = useNavigate();
   const calculateTotal = () => {
     return booking.reduce((sum, item) => {
       if (!item?.price) return sum;
@@ -36,6 +38,10 @@ function BookingModal({ onClose }) {
       Component: HybridLash,
     },
   ];
+  const handleDatePicker = (e) => {
+    e.stopPropagation();
+    navigate("/date-picker");
+  };
   return (
     <>
       <section className="w-full h-screen flex flex-col justify-center space-y-4">
@@ -106,6 +112,13 @@ function BookingModal({ onClose }) {
                       </div>
                     </div>
                   )}
+                </div>
+                <div className="flex items-center justify-center mt-6">
+                  <button onClick={handleDatePicker}>
+                    <span className="font-semibold px-4 py-2 bg-black text-white rounded-lg ">
+                      Book Now
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>

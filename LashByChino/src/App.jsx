@@ -4,6 +4,9 @@ import NavBar from "./component/NavBar";
 import Footer from "./component/Footer";
 import Hompage from "./pages/Hompage";
 import BookingModal from "./modal/BookingModal";
+import DatePicker from "./DatePicker/DatePicker";
+import { DateProvider } from "./context/useDate";
+import UserInfo from "./component/UserInfo/UserInfo";
 
 function AppRoutes() {
   const location = useLocation();
@@ -18,6 +21,8 @@ function AppRoutes() {
         <Route path="/about" element={<div>About Page</div>} />
         <Route path="/contact" element={<div>Contact Page</div>} />
         <Route path="/booking" element={<BookingModal />} />
+        <Route path="/date-picker" element={<DatePicker />} />
+        <Route path="/user-info" element={<UserInfo />} />
       </Routes>
       <div className="pb-20"></div>
       {!hideFooter && <Footer />}
@@ -29,7 +34,9 @@ function App() {
   return (
     <BrowserRouter>
       <ModalProvider>
-        <AppRoutes />
+        <DateProvider>
+          <AppRoutes />
+        </DateProvider>
       </ModalProvider>
     </BrowserRouter>
   );

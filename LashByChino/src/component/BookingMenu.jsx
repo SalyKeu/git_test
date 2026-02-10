@@ -1,7 +1,9 @@
 import { useModal } from "@/context/useModal";
 import { X, ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import React from "react";
+import DatePicker from "../DatePicker/DatePicker";
 
 function BookingMenuModal({ onClose }) {
   const { booking } = useModal();
@@ -75,39 +77,45 @@ function BookingMenuModal({ onClose }) {
   );
 }
 
-function BookingMenu({ onOpen }) {
+const BookingMenu = ({ onOpen }) => {
   const { booking } = useModal();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
   const handleOpen = () => {
     if (onOpen) onOpen();
     setIsModalOpen(true);
   };
   const handleClose = () => setIsModalOpen(false);
+  // ... (previous calculation functions remain effectively unchanged if I don't touch them, but I need to be careful with the range)
+
   const calculateTotal = () => {
     return booking.reduce((sum, item) => {
+      // ... same logic
       if (!item?.price) return sum;
       return sum + parseFloat(item.price.replace("$", ""));
     }, 0);
   };
 
   const calculateTotalDuration = () => {
+    // ... same logic
     const totalMinutes = booking.reduce((total, { duration }) => {
-      if (!duration) return total;
-
-      const max = duration.split("-").pop().trim();
-      const value = parseFloat(max);
-
-      if (max.includes("hr")) return total + value * 60;
-      if (max.includes("min")) return total + value;
-
-      return total;
+        if (!duration) return total;
+        const max = duration.split("-").pop().trim();
+        const value = parseFloat(max);
+        if (max.includes("hr")) return total + value * 60;
+        if (max.includes("min")) return total + value;
+        return total;
     }, 0);
-
     const hrs = Math.floor(totalMinutes / 60);
     const mins = totalMinutes % 60;
-
     return hrs ? (mins ? `${hrs} hr ${mins} min` : `${hrs} hr`) : `${mins} min`;
   };
+
+  const handleDatePicker = (e) => {
+    e.stopPropagation();
+    navigate("/date-picker");
+  }
   return (
     <>
       {isModalOpen && <BookingMenuModal onClose={handleClose} />}
@@ -129,7 +137,7 @@ function BookingMenu({ onOpen }) {
             <span>{booking.length} services</span>
             <span>•</span>
             <span>{calculateTotalDuration()}</span>
-            <button className="bg-pink-500 md:px-4 md:py-2 p-2 text-white border-2 border-black rounded-xl -mt-3 ml-auto mr-4 md:mr-10">
+            <button className="bg-pink-500 md:px-4 md:py-2 p-2 text-white border-2 border-black rounded-xl -mt-3 ml-auto mr-4 md:mr-10" onClick={handleDatePicker}>
               Continue
             </button>
           </div>
