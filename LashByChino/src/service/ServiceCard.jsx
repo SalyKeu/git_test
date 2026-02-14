@@ -1,7 +1,7 @@
 import React, { act } from "react";
 import BookingMenu from "@/component/BookingMenu";
 import { Plus, X, Check } from "lucide-react";
-import { useModal } from "@/context/useModal";
+import { useBooking } from "@/context/useBooking";
 
 function ServiceCard({
   title,
@@ -14,7 +14,7 @@ function ServiceCard({
   setActiveModal,
   activeModal,
 }) {
-  const { booking, removeBookingItem, addBookingItem } = useModal();
+  const { booking, removeBookingItem, addBookingItem } = useBooking();
   const isAdded = booking.some((item) => item.name === title);
 
   const handleButtonClick = (e) => {

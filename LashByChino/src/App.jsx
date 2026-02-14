@@ -1,13 +1,11 @@
 import { Route, Routes, BrowserRouter, useLocation } from "react-router-dom";
-import { ModalProvider } from "./context/useModal";
 import NavBar from "./component/NavBar";
 import Footer from "./component/Footer";
 import Hompage from "./pages/Hompage";
 import BookingModal from "./modal/BookingModal";
 import DatePicker from "./DatePicker/DatePicker";
-import { DateProvider } from "./context/useDate";
-import UserInfo from "./component/UserInfo/UserInfo";
-
+import UserInfo from "./UserInfo/UserInfo";
+import { BookingProvider } from "./context/useBooking";
 function AppRoutes() {
   const location = useLocation();
   const hideFooter = location.pathname === "/booking";
@@ -33,11 +31,9 @@ function AppRoutes() {
 function App() {
   return (
     <BrowserRouter>
-      <ModalProvider>
-        <DateProvider>
-          <AppRoutes />
-        </DateProvider>
-      </ModalProvider>
+      <BookingProvider>
+            <AppRoutes />
+      </BookingProvider>
     </BrowserRouter>
   );
 }

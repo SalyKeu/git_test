@@ -1,11 +1,11 @@
 import React from 'react'
-import { ModalProvider } from '../context/useModal';
+import { BookingProvider } from '@/context/useBooking'
 
 function Provider({children}) {
   return (
-    <ModalProvider>
+    <BookingProvider>
         {children}
-    </ModalProvider>
+    </BookingProvider>
   )
 }
 

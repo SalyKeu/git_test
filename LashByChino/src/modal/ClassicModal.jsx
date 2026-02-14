@@ -1,10 +1,10 @@
 import React from "react";
 import { Plus, X } from "lucide-react";
-import { useModal } from "@/context/useModal";
 import ServiceCard from "@/service/ServiceCard";
+import { useBooking } from "@/context/useBooking";
 
 function ClassicLash({ onClose, title, duration, description, price }) {
-  const { addBookingItem, removeBookingItem, booking } = useModal();
+  const { addBookingItem, removeBookingItem, booking } = useBooking();
   const isAdded = booking.some((item) => item.name === title);
 
   const handleButtonClick = () => {

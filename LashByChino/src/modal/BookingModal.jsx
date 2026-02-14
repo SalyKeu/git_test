@@ -2,14 +2,14 @@ import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClassicLash from "./ClassicModal";
 import HybridLash from "./HybridModal";
-import { useModal } from "../context/useModal";
+import { useBooking } from "../context/useBooking";
 import Logo from "../assets/classic.jpg";
 import BookingMenu from "@/component/BookingMenu";
 import ServiceCard from "@/service/ServiceCard";
 import { X } from "lucide-react";
 
 function BookingModal({ onClose }) {
-  const { isOpen, openModal, closeModal, booking } = useModal();
+  const { isOpen, openModal, closeModal, booking } = useBooking();
   const [activeModal, setActiveModal] = useState(null);
   const navigate = useNavigate();
   const calculateTotal = () => {

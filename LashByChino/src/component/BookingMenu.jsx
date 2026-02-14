@@ -1,4 +1,4 @@
-import { useModal } from "@/context/useModal";
+import { useBooking } from "@/context/useBooking";
 import { X, ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import React from "react";
 import DatePicker from "../DatePicker/DatePicker";
 
 function BookingMenuModal({ onClose }) {
-  const { booking } = useModal();
+  const { booking } = useBooking();
   const calculateTotal = () => {
     return booking.reduce((sum, item) => {
       if (!item?.price) return sum;
@@ -78,7 +78,7 @@ function BookingMenuModal({ onClose }) {
 }
 
 const BookingMenu = ({ onOpen }) => {
-  const { booking } = useModal();
+  const { booking } = useBooking();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 

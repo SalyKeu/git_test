@@ -1,10 +1,10 @@
 import React from "react";
 import { Plus, X } from "lucide-react";
-import { useModal } from "@/context/useModal";
+import { useBooking } from "@/context/useBooking";
 import ServiceCard from "@/service/ServiceCard";
 
 function HybridLash({ onClose, title, duration, description, price }) {
-  const { addBookingItem, removeBookingItem, booking } = useModal();
+  const { addBookingItem, removeBookingItem, booking } = useBooking();
   const isAdded = booking.some((item) => item.name === title);
 
   const handleButtonClick = () => {

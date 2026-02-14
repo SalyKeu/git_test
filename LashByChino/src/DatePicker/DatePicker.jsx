@@ -1,11 +1,11 @@
-import { useDate } from "../context/useDate";
+import { useBooking } from "../context/useBooking";
 import { Calendar } from "react-calendar";
 import { format } from "date-fns";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function DatePicker() {
-  const { date, setDate, time: selectedTime, setTime } = useDate();
+  const { date, setDate, time: selectedTime, setTime } = useBooking();
   const navigate = useNavigate();
 
   // Generate time slots (e.g., 9:00 AM to 5:00 PM)
